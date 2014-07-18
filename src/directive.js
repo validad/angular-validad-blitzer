@@ -9,12 +9,18 @@ angular.module('angular-validad-blitzer.directive', [])
         replace: true,
         controller: function ($rootScope, $scope, $timeout, blitzer) {
             $scope.blitzers = [];
+
             blitzer.subscribe(function (state, blitzers) {
                 $scope.blitzers.push({
                     state: state,
                     msg: blitzers
                 });
             });
+
+            $scope.close = function (index) {
+                $scope.blitzers.splice(index, 1);
+            };
+
         },
         template: function () {
             return [
