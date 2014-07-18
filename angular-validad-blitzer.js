@@ -18,6 +18,9 @@
               msg: blitzers
             });
           });
+          $scope.close = function (index) {
+            $scope.blitzers.splice(index, 1);
+          };
         }
       ],
       template: function () {
