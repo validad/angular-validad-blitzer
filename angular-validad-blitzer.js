@@ -8,22 +8,27 @@
       controller: [
         '$rootScope',
         '$scope',
+        '$timeout',
         'blitzer',
-        function ($rootScope, $scope, blitzer) {
-          blitzer.subscribe(function (state, messages) {
-            $scope.messages = messages;
-            $scope.state = state;
+        function ($rootScope, $scope, $timeout, blitzer) {
+          $scope.blitzers = [];
+          blitzer.subscribe(function (state, blitzers) {
+            $scope.blitzers.push({
+              state: state,
+              msg: blitzers
+            });
           });
         }
       ],
       template: function () {
         return [
           '<div',
-          '   class="alert alert-{{state}}"',
-          '   ng-role="alert"',
-          '   ng-repeat="message in messages"',
+          '   class="alert alert-{{blitzer.state}}"',
+          '   role="alert"',
+          '   ng-click="close($index)"',
+          '   ng-repeat="blitzer in blitzers"',
           '>',
-          '   {{message}}',
+          '   {{blitzer.msg}}',
           '</div>'
         ].join('');
       }
