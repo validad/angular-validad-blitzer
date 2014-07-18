@@ -7,23 +7,24 @@ angular.module('angular-validad-blitzer.directive', [])
     return {
         restrict: 'E',
         replace: true,
-        controller: function ($rootScope, $scope, blitzer) {
-            blitzer.subscribe(function (state, messages) {
-                $scope.messages = messages;
-                $scope.state = state;
+        controller: function ($rootScope, $scope, $timeout, blitzer) {
+            $scope.blitzers = [];
+            blitzer.subscribe(function (state, blitzers) {
+                $scope.blitzers.push({
+                    state: state,
+                    msg: blitzers
+                });
             });
-            $scope.close = function () {
-
-            };
         },
         template: function () {
             return [
                 '<div',
-                '   class="alert alert-{{state}}"',
+                '   class="alert alert-{{blitzer.state}}"',
                 '   role="alert"',
-                '   ng-repeat="message in messages"',
+                '   ng-click="close($index)"',
+                '   ng-repeat="blitzer in blitzers"',
                 '>',
-                '   {{message}}',
+                '   {{blitzer.msg}}',
                 '</div>'
             ].join('');
         }
