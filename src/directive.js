@@ -12,12 +12,15 @@ angular.module('angular-validad-blitzer.directive', [])
                 $scope.messages = messages;
                 $scope.state = state;
             });
+            $scope.close = function () {
+
+            };
         },
         template: function () {
             return [
                 '<div',
                 '   class="alert alert-{{state}}"',
-                '   ng-role="alert"',
+                '   role="alert"',
                 '   ng-repeat="message in messages"',
                 '>',
                 '   {{message}}',
