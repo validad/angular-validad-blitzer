@@ -16,7 +16,6 @@ module.exports = function (grunt) {
             options: {
                 pushTo: 'origin',
                 files: ['bower.json', 'package.json'],
-                updateConfigs: ['bower.json', 'package.json'],
                 commitFiles: ['-a']
             }
         },
@@ -36,6 +35,10 @@ module.exports = function (grunt) {
             }
         },
         concat: {
+            options: {
+                banner: ';(function () {',
+                footer: '}())'
+            },
             src: {
                 src: ['src/**/*.js'],
                 dest: 'angular-validad-blitzer.js'
