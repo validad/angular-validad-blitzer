@@ -1,0 +1,33 @@
+{
+  "name": "angular-validad-blitzer",
+  "author": "Validad GmbH",
+  "description": "Flash Notifications the easy-way",
+  "version": "0.1.1",
+  "homepage": "https://github.com/validad/angular-validad-blitzer.git",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:validad/angular-validad-blitzer.git"
+  },
+  "main": "angular-validad-blitzer.js",
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start --browsers Firefox --single-run"
+  },
+  "license": "WTFPL",
+  "devDependencies": {
+    "grunt": "^0.4.2",
+    "grunt-bump": "0.0.14",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-concat": "^0.3.x",
+    "grunt-contrib-jshint": "^0.4.x",
+    "grunt-contrib-uglify": "^0.2.x",
+    "grunt-contrib-watch": "^0.5.3",
+    "grunt-conventional-changelog": "^1.0.x",
+    "grunt-karma": "^0.8.3",
+    "grunt-ngmin": "^0.0.3",
+    "karma": "^0.12.17",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-jasmine": "^0.1.5",
+    "load-grunt-tasks": "^0.2.0",
+    "lodash": "^2.4.x"
+  }
+}

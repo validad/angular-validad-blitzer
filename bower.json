@@ -1,0 +1,23 @@
+{
+    "author": "Validad GmbH",
+    "name": "angular-validad-blitzer",
+    "description": "Flash Notifications the easy-way",
+    "version": "0.0.0",
+    "homepage": "https://github.com/validad/angular-validad-blitzer.git",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:validad/angular-validad-blitzer.git"
+    },
+    "main": "angular-validad-blitzer.js",
+    "ignore": [
+        "*",
+        "!angular-validad-blitzer.js",
+        "!angular-validad-blitzer.min.js"
+    ],
+    "dependencies": {
+        "angular": "~1.2.20"
+    },
+    "devDependencies": {
+        "angular-mocks": "~1.2.20"
+    }
+}
