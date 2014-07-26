@@ -24,9 +24,9 @@ angular.module('angular-validad-blitzer.provider', [])
     };
 
     Blitzer.prototype.add = function (name) {
-        this.subjects[name] = function () {
-            var args = Array.prototype.slice.call(arguments);
-            this.fire(name, args);
+        this.subjects[name] = function (group) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            this.fire(name, group, args);
         }.bind(this);
         // extend Blitzer with subject as function
         this[name] = this.subjects[name];
