@@ -1,34 +1,28 @@
 describe('angular-validad-blitzer', function () {
-    var blitzer;
+    var topics = ['notify', 'danger', 'warning', 'success'];
 
     beforeEach(module('angular-validad-blitzer'));
-
-    beforeEach(inject(function (_blitzer_) {
-        blitzer = _blitzer_;
+    beforeEach(module(function (blitzerProvider) {
+        blitzerProvider.topics(topics);
     }));
 
-    //beforeEach(module(function (_blitzerProvider_) {
-        //blitzerProvider = _blitzerProvider_;
-    //}));
+    describe('blitzer service', function () {
+        it('should have topics as function', inject(function (blitzer) {
+            angular.forEach(topics, function (topic) {
+                spyOn(blitzer, topic);
+                blitzer[topic]();
+                expect(blitzer[topic]).toHaveBeenCalled();
+            });
+        }));
 
-    //describe('blitzer provider settings', function () {
-        //var sampleStates = ['error', 'warning'];
-
-        //it('should extend default blitzer states', function () {
-            //inject(function (blitzer) {
-                //expect(blitzer.error).toBeDefined();
-            //});
-        //});
-    //});
-
-    describe('blitzer basic service', function () {
-
-        it('should be defined', function () {
-            expect(blitzer).toBeDefined();
-        });
-
-        it('should have default notify function', function () {
-            expect(typeof blitzer.notify).toBe('function');
-        });
+        it('should subscribe', inject(function (blitzer) {
+            var message = ['mymessage', {'ping': 'pong'}];
+            blitzer.subscribe(function (topic, messages) {
+                expect(message).toEqual(messages);
+            });
+            angular.forEach(topics, function (topic) {
+                blitzer[topic].apply(null, message);
+            });
+        }));
     });
 });

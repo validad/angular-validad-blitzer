@@ -1,53 +1,42 @@
 angular.module('angular-validad-blitzer.provider', [])
 
 .provider('blitzer', function () {
-
     'use strict';
 
-    var states = ['notify'];
-    var template = null;
-
-    this.defineStates = function (customStates) {
-        states = states.concat(customStates);
-    };
-    this.defineTemplate = function (tmplStr) {
-        template = tmplStr;
-    };
-    this.$get = function () {
-        return Blitzer.build(states, template);
+    var settings = {
+        topics: ['notify']
     };
 
-    var Blitzer = function (template) {
+    var Blitzer = function (settings) {
         this.listeners = [];
         this.subjects = {};
-        this.template = template;
+
+        angular.forEach(settings.topics, this.add, this);
     };
 
-    Blitzer.prototype.add = function (name) {
-        this.subjects[name] = function (group) {
-            var args = Array.prototype.slice.call(arguments, 1);
-            this.fire(name, group, args);
+    Blitzer.prototype.add = function (topic) {
+        this[topic] = this.subjects[topic] = function (group) {
+            this.publish(topic, Array.prototype.slice.call(arguments));
         }.bind(this);
-        // extend Blitzer with subject as function
-        this[name] = this.subjects[name];
     };
 
     Blitzer.prototype.subscribe = function (listener) {
         this.listeners.push(listener);
     };
 
-    Blitzer.prototype.fire = function () {
+    Blitzer.prototype.publish = function () {
         var args = Array.prototype.slice.call(arguments);
-        this.listeners.forEach(function (listener) {
+        angular.forEach(this.listeners, function (listener) {
             listener.apply(this, args);
         }.bind(this));
     };
 
-    Blitzer.build = function (states, template) {
-        var blitzer = new Blitzer(template);
-        angular.forEach(states, function (state) {
-            blitzer.add(state);
-        });
-        return blitzer;
+    // Provider Methods
+    this.topics = function (topics) {
+        angular.extend(settings.topics, topics);
+    };
+
+    this.$get = function () {
+        return new Blitzer(settings);
     };
 });
