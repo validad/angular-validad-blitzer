@@ -3,15 +3,12 @@ angular.module('angular-validad-blitzer.provider', [])
 .provider('blitzer', function () {
     'use strict';
 
-    var settings = {
-        topics: ['notify']
-    };
+    var topics = ['notify'];
 
-    var Blitzer = function (settings) {
+    var Blitzer = function () {
         this.listeners = [];
         this.subjects = {};
-
-        angular.forEach(settings.topics, this.add, this);
+        angular.forEach(topics, this.add, this);
     };
 
     Blitzer.prototype.add = function (topic) {
@@ -32,11 +29,11 @@ angular.module('angular-validad-blitzer.provider', [])
     };
 
     // Provider Methods
-    this.topics = function (topics) {
-        angular.extend(settings.topics, topics);
+    this.topics = function (userTopics) {
+        topics = topics.concat(userTopics);
     };
 
     this.$get = function () {
-        return new Blitzer(settings);
+        return new Blitzer();
     };
 });
