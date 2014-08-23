@@ -17,12 +17,16 @@ describe('angular-validad-blitzer', function () {
 
         it('should subscribe', inject(function (blitzer) {
             var message = ['mymessage', {'ping': 'pong'}];
+
+            // first subscribe a callback
             blitzer.subscribe(function (topic, messages) {
                 expect(message).toEqual(messages);
             });
+            // invoke blitzer(s)
             angular.forEach(topics, function (topic) {
                 blitzer[topic].apply(null, message);
             });
+
         }));
     });
 });
