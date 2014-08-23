@@ -10,7 +10,8 @@
   },
   "main": "angular-validad-blitzer.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --browsers Firefox --single-run"
+    "test": "./node_modules/karma/bin/karma start --browsers Firefox --single-run",
+    "start": "./node_modules/.bin/grunt watch"
   },
   "license": "WTFPL",
   "devDependencies": {
